@@ -37,7 +37,7 @@ CITATION_PTN = r"""
 CITATION_PTN_RE = re.compile(CITATION_PTN, re.IGNORECASE | re.MULTILINE | re.DOTALL | re.VERBOSE)
 
 
-def get_citations(text: str, return_source=False, as_dict=False) -> Generator:
+def get_citations(text: str, return_source = False, as_dict=False) -> Generator:
     """
     Get citations.
     :param text:
@@ -57,8 +57,6 @@ def get_citations(text: str, return_source=False, as_dict=False) -> Generator:
                     ant.page_range,
                     ant.court,
                     ant.year)
-            if return_source:
-                item += (ant.source,)
             yield item
 
 

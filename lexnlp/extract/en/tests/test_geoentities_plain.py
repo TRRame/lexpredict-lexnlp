@@ -16,7 +16,7 @@ from lexnlp.tests.typed_annotations_tests import TypedAnnotationsTester
 
 def make_geoconfig():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    ge_path = dir_path + '/../../../../test_data/lexnlp/extract/en/tests/test_geoentities/'
+    ge_path = dir_path + '/test_data/lexnlp/extract/en/tests/test_geoentities/'
     entities_fn = ge_path + 'geoentities.csv'
     aliases_fn = ge_path + 'geoaliases.csv'
     return list(DictionaryEntry.load_entities_from_files(entities_fn, aliases_fn))
