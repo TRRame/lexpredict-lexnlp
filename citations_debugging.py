@@ -7,7 +7,7 @@ case = open("/home/tristan/Stage/TextesJuridiques/AmericansForProsperityFoundati
 
 
 text = case.read()
-text = text.replace("\n", " ")
+text = text.replace("\n", "")
 text = text.replace("\t", " ")
 text = text.replace("\xa0", " ")
 case.close()
@@ -15,8 +15,8 @@ case.close()
 
 
 #We store the output from get_citations in a variable, and we print the list obtained line per line.
-citations_list = (list(lexnlp.extract.en.citations.get_citation_annotations(text)))
+citations_list = (list(lexnlp.extract.en.citations.get_citations(text)))
 
 
 for citations in citations_list:
-    print(citations.court)
+    print(citations)

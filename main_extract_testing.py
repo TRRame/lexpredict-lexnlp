@@ -15,6 +15,13 @@ import lexnlp.extract.en.money
 import lexnlp.extract.en.percents
 import lexnlp.extract.en.ratios
 import lexnlp.extract.en.regulations
+import lexnlp.extract.en.courts
+import lexnlp.extract.en.trademarks
+import lexnlp.extract.en.cusip
+import lexnlp.extract.en.pii
+import lexnlp.extract.en.definitions
+import lexnlp.extract.en.addresses
+import lexnlp.extract.en.urls
 
 #For company extracting
 import lexnlp.extract.en.entities.nltk_maxent
@@ -45,8 +52,8 @@ for case in cases:
 #We delete the tabulation and nextline from the text has it can cause some parsing problems
 for text in unprocessed_texts:
     text = text.replace("\n", "")
-    text = text.replace("\t", "")
-    text = text.replace("\xa0", "")
+    text = text.replace("\t", " ")
+    text = text.replace("\xa0", " ")
     texts.append(text)
 
 
@@ -73,15 +80,17 @@ def display_result(results):
 
 
 #TODO Generalize the file loading to all the text from a directory in a list
-
+'''
 #Printing all the results we get from the different extraction modules
 acts_list = function_applyer(lexnlp.extract.en.acts.get_acts, texts)
 display_result(acts_list)
 
-'''
+
 #We store the output from get_citations in a variable, and we print the list obtained line per line.
 #citations_list = (lexnlp.extract.en.citations.get_citation_annotations(text))
 citations_list  = function_applyer(lexnlp.extract.en.citations.get_citations, texts)
+
+display_result(citations_list)
 
 
 #Company extractor
@@ -94,7 +103,7 @@ date_list = function_applyer(lexnlp.extract.en.dates.get_dates, texts)
 
 #Copyright extractor
 copyright_list = function_applyer(lexnlp.extract.en.copyright.get_copyright, texts)
-
+'''
 
 
 #Geoentities setup
@@ -117,7 +126,7 @@ for geoentity in geoentity_list:
     for object in geoentity:
         print(object)
 
-
+'''
 #Duration setup
 duration_list = function_applyer(lexnlp.extract.en.durations.get_durations, texts)
 
@@ -150,4 +159,25 @@ display_result(ratio_list)
 #Regulation setup
 regulation_list = function_applyer(lexnlp.extract.en.regulations.get_regulations, texts)
 display_result(regulation_list)
+
+
+#CUSIP setup, no result on our corpus
+cusip_list = function_applyer(lexnlp.extract.en.cusip.get_cusip, texts)
+display_result(cusip_list)
+
+#PII setup, no result on our corpus
+pii_list = function_applyer(lexnlp.extract.en.pii.get_pii, texts)
+display_result(pii_list)
+
+#trademarks setup, no result on our corpus
+trademarks_list = function_applyer(lexnlp.extract.en.trademarks.get_trademarks, texts)
+display_result(trademarks_list)
+
+#definitions setup
+definitions_list = function_applyer(lexnlp.extract.en.definitions.get_definitions, texts)
+display_result(definitions_list)
+
+#url setup
+url_list = function_applyer(lexnlp.extract.en.urls.get_urls, texts)
+display_result(url_list)
 '''

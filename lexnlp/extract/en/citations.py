@@ -22,7 +22,7 @@ from reporters_db import EDITIONS, REPORTERS
 
 from lexnlp.extract.common.annotations.citation_annotation import CitationAnnotation
 
-
+#At line 33 col 15, a second question mark was needed to make the "court" search lazy and not cause any problem.
 CITATION_PTN = r"""
 (?:[\s,:\(]|^)
 (
@@ -30,7 +30,7 @@ CITATION_PTN = r"""
 ({reporters})\s+
 (\d+)
 (?:,\s+(\d+(?:\-\d+)?))?
-(?:\s+\((.+?)?(\d{{4}})\))?
+(?:\s+\((.+?)??(\d{{4}})\))?
 )
 (?:\W|$)
 """.format(reporters='|'.join([re.escape(i) for i in EDITIONS]))
