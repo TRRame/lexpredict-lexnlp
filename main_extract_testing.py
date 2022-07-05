@@ -84,15 +84,13 @@ def display_result(results):
 #Printing all the results we get from the different extraction modules
 acts_list = function_applyer(lexnlp.extract.en.acts.get_acts, texts)
 display_result(acts_list)
-
+'''
 
 #We store the output from get_citations in a variable, and we print the list obtained line per line.
 #citations_list = (lexnlp.extract.en.citations.get_citation_annotations(text))
 citations_list  = function_applyer(lexnlp.extract.en.citations.get_citations, texts)
 
-display_result(citations_list)
-
-
+'''
 #Company extractor
 company_list = function_applyer(lexnlp.extract.en.entities.nltk_maxent.get_companies, texts)
 
@@ -103,7 +101,7 @@ date_list = function_applyer(lexnlp.extract.en.dates.get_dates, texts)
 
 #Copyright extractor
 copyright_list = function_applyer(lexnlp.extract.en.copyright.get_copyright, texts)
-'''
+
 
 
 #Geoentities setup
@@ -126,7 +124,7 @@ for geoentity in geoentity_list:
     for object in geoentity:
         print(object)
 
-'''
+
 #Duration setup
 duration_list = function_applyer(lexnlp.extract.en.durations.get_durations, texts)
 
