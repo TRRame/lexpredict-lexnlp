@@ -4,11 +4,13 @@ import os
 import csv
 from pathlib import Path
 
+#We ask the user the path to the file he wants to use.
 file_path = Path(input("Enter the file path: ").strip())
 file_name = input("Enter the file name with extension (.txt): ".strip())
 file_full_path = file_path / file_name
 case = open(file_full_path, 'r')
 
+#This function process the given text to remove line break, tabulation, and non-breaking space.
 def process_text(textToProcess):
     processed_text = []
     for line in textToProcess:
@@ -37,11 +39,15 @@ def get_result_with_line(text) :
             new_list.append((i, result))
     return new_list
 
+#We get the result using the get_result_with_line function and print it in the terminal.
 citation_list = get_result_with_line(processed_text)
 print(citation_list)
 
-#We write a csv file with the result we got from extraction.
-with open("/home/tristan/Stage/EtudeLogiciels/FileToCompare/Citations_BordenvUSAKagan_ResultsToCompare.csv", "w", newline="") as file_writer:
+#We write the result in a csv file using another path given by the user
+csv_file_path = Path(input("Enter the file path: ").strip())
+csv_file_name = input("Enter the file name with extension (.csv): ".strip())
+csv_file_full_path = csv_file_path / csv_file_name
+with open(csv_file_full_path, "w", newline="") as file_writer:
     fields = ["Line", "Citation"]
 
     writer=csv.DictWriter(file_writer, fieldnames=fields)
