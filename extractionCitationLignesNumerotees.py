@@ -2,8 +2,12 @@ import string
 import lexnlp.extract.en.citations
 import os
 import csv
+from pathlib import Path
 
-case = open("/home/tristan/Stage/TextesJuridiques/BordenvUnitedStatesKagan.txt", 'r')
+file_path = Path(input("Enter the file path: ").strip())
+file_name = input("Enter the file name with extension (.txt): ".strip())
+file_full_path = file_path / file_name
+case = open(file_full_path, 'r')
 
 def process_text(textToProcess):
     processed_text = []
@@ -34,6 +38,7 @@ def get_result_with_line(text) :
     return new_list
 
 citation_list = get_result_with_line(processed_text)
+print(citation_list)
 
 #We write a csv file with the result we got from extraction.
 with open("/home/tristan/Stage/EtudeLogiciels/FileToCompare/Citations_BordenvUSAKagan_ResultsToCompare.csv", "w", newline="") as file_writer:

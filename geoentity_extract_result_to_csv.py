@@ -5,11 +5,15 @@ from unittest import result
 from lexnlp.extract.en.dict_entities import DictionaryEntry
 from lexnlp.extract.en.geoentities import get_geoentities, get_geoentity_annotations
 import lexnlp.extract.en.geoentities
+from pathlib import Path
 
-#We load the text and process it.
-case1 = open("/home/tristan/Stage/TextesJuridiques/AmericansForProsperityFoundationvBontaRoberts.txt", 'r')
-print(type(case1))
+#We ask the user the path to the file he wants to use.
+file_path = Path(input("Enter the file path: ").strip())
+file_name = input("Enter the file name with extension (.txt): ".strip())
+file_full_path = file_path / file_name
+case1 = open(file_full_path, 'r')
 
+#This function process the given text to remove line break, tabulation, and non-breaking space.
 def process_text(textToProcess):
     processed_text = []
     for line in case1:
@@ -37,6 +41,7 @@ def make_geoconfig():
 
 GEO_CONFIG = make_geoconfig()
 
+#We get all the geoentities in a list. The list is a list of tuple with the lexnlp function result and the part of the text where it comes from.
 geoentity_list = []
 for text in processed_text:
     geo_result = lexnlp.extract.en.geoentities.get_geoentities(text, GEO_CONFIG)
@@ -44,8 +49,12 @@ for text in processed_text:
         g = (res, text)
         geoentity_list.append(g)
 
-#We write a csv file with the result we got from extraction.
-with open("/home/tristan/Stage/EtudeLogiciels/EtudeLexNLP/Geoentity_APFvBontaRobertsResults.csv", "w", newline="") as file_writer:
+
+#We write the result in a csv file using another path given by the user
+csv_file_path = Path(input("Enter the file path: ").strip())
+csv_file_name = input("Enter the file name with extension (.csv): ".strip())
+csv_file_full_path = csv_file_path / csv_file_name
+with open(csv_file_full_path, "w", newline="") as file_writer:
     fields = ["Geoentity", "Source"]
 
     writer=csv.DictWriter(file_writer, fieldnames=fields)
